@@ -1,0 +1,72 @@
+<div class="row bg-light">
+    <div class="col-md-4 m-auto mt-5 px-5 pt-5"
+        style="border-style: solid;border-width: 1px;border-radius: 15px;border-color: silver;">
+        <h2 class="text-center">signUp</h2>
+        <form action="/signup" method="post" id="Signup">
+            <div class="form-group mt-4">
+                <input type="text" class="form-control" name='name' placeholder="Username">
+            </div>
+            <div class="form-group mt-4">
+                <input type="email" class="form-control" name='email' placeholder="Email">
+            </div>
+            <div class="form-group mt-4">
+                <input type="text" class="form-control" name='phone' placeholder="Phone Number">
+            </div>
+            <div class="form-group mt-4">
+                <input type="password" class="form-control" id="password" name='password' placeholder="Password">
+            </div>
+            <div class="form-group mt-4">
+                <input type="password" class="form-control" name='c_password' placeholder="Confirm Password">
+            </div>
+
+            {{#if loginErr}}
+            <p class="error" style="color: red; padding-top:5px"><i class="fas fa-exclamation-triangle"></i> Invalid
+                Email or Password</p>
+            {{/if}}
+            <div class="mt-2 text-center">
+                <button type="submit" class="btn btn-primary mt-4" >Submit</button>
+            </div>
+            <div class="my-4 text-center ">
+                <p style="font-size: 11px;">Already have an account   <a href="/login" class="text-decoration-none">Login</a></p>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+    $("#Signup").validate({
+      errorClass: "valierrors",
+  
+      rules:{
+        name:{
+          required:true,
+          minlength:4
+        },
+  
+        email:{
+          required:true,
+          email:true
+        },
+  
+        phone:{
+          required:true,
+          minlength:10
+        },
+  
+        password:{
+          required:true,
+          minlength: 5
+        },
+        c_password:{
+            required:true,
+            equalTo:'#password'
+        }
+      }
+    })
+  })
+  
+</script>

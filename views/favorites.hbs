@@ -1,0 +1,27 @@
+<section class="text-center mb-4">
+    <div class="row fadeIn">
+      {{#each products}}
+      {{#each this}}
+      {{#if this.name}}
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/add-favorites/{{this._id}}'">
+        <div class="card">
+          <div class="view overlay">
+            <img src="/images/product-images/{{this._id}}(1).jpg" class="card-img-top" alt=""/>
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body text-center">
+            <h5>{{this.name}}</h5>
+            <p>{{this.description}}</p>
+            <h4 class="font-weight-bold blue-text">
+              <strong>₹ {{this.price}}</strong>
+            </h4>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+      {{/each}}
+    </div>
+  </section>

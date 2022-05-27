@@ -1,0 +1,72 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mb-5" style="background-color: #929fba; margin-top:5rem">
+    <span class="navbar-brand">Categories:</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Top deals
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/mobile">Mobile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/accessories">Accessories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/tablet">Tablet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/cars">Cars</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/bikes">Bikes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/furniture">Furniture</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/category/fashion">Fashion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pets</a>
+        </li>
+      </ul>
+      <div class="md-form my-0">
+        <a class="nav-link" href="/sell_product/{{user._id}}">Sell</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="text-center mb-4">
+    <div class="row fadeIn">
+      {{#each products}}
+      {{#each this}}
+      {{#if this.name}}
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/add-favorites/{{}}'">
+        <div class="card">
+          <div class="view overlay">
+            <img src="/images/product-images/{{this._id}}(1).jpg" class="card-img-top" alt=""/>
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <div class="card-body text-center">
+            <h5>{{this.name}}</h5>
+            <p>{{this.description}}</p>
+            <h4 class="font-weight-bold blue-text">
+              <strong>₹ {{this.price}}</strong>
+            </h4>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+      {{/each}}
+    </div>
+  </section>
+</div>

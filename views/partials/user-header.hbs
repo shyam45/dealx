@@ -1,0 +1,56 @@
+{{#if user}}
+<header>
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar ">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+        <img src="/images/logo.png" alt="" height="50">
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/">Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/favorites">Wishlist
+            </a>
+          </li>
+        </ul>
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect">
+              <span class="clearfix d-none d-sm-inline-block"> Premium </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/logout" class="nav-link waves-effect ml-4">
+               <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect ml-3">
+              <span class="clearfix d-none d-sm-inline-block"> {{user.name}} </span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+</header>
+{{/if}}
