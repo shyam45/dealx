@@ -1,5 +1,5 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mb-5" style="background-color: #929fba; margin-top:5rem">
+  <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mb-5" style="background-color: #929fba; margin-top:5rem; height:30px">
     <span class="navbar-brand">Categories:</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -47,7 +47,7 @@
       {{#each products}}
       {{#each this}}
       {{#if this.name}}
-      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/add-favorites/{{}}'">
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/product/{{this._id}}'">
         <div class="card">
           <div class="view overlay">
             <img src="/images/product-images/{{this._id}}(1).jpg" class="card-img-top" alt=""/>

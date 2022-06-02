@@ -1,12 +1,10 @@
 <section class="text-center mb-4">
     <div class="row fadeIn">
-      {{#each products}}
-      {{#each this}}
-      {{#if this.name}}
-      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/add-favorites/{{this._id}}'">
+      {{#each favorites}}
+      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/delete-favorite/{{this.f_id}}'">
         <div class="card">
           <div class="view overlay">
-            <img src="/images/product-images/{{this._id}}(1).jpg" class="card-img-top" alt=""/>
+            <img src="/images/product-images/{{this.p_id}}(1).jpg" class="card-img-top" alt=""/>
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -20,8 +18,6 @@
           </div>
         </div>
       </div>
-      {{/if}}
-      {{/each}}
       {{/each}}
     </div>
   </section>

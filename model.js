@@ -26,9 +26,6 @@ const userSchema = new mongoose.Schema({
         required: 'Password is required',
         minlength:8
     },
-    premium:{
-        type : Boolean
-    },
     favorites:{
         type : Array
     }
