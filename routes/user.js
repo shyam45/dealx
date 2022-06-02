@@ -3,14 +3,9 @@ var express = require("express");
 const userHealpers = require("../helpers/userHealpers");
 const { product } = require("../model");
 var router = express.Router();
-const Razorpay = require('razorpay');
-
-var instance = new Razorpay({
-  key_id: 'rzp_test_kmq5nVDtZoxuYi',
-  key_secret: 'P8ebn9gARuTf5udSoBgaorPy',
-});
 
 
+let sub_id;
 let productdetails;
 
 /* GET home page. */
@@ -33,12 +28,6 @@ router.get("/", function (req, res, next) {
   }
 });
 
-router.get("/product/:id", async(req, res) => {
-  userHealpers.getProduct(req.params.id).then((product) => {
-    res.render("product-details",{product})
-  })
-})
-
 router.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -49,40 +38,6 @@ router.post("/signup", async (req, res) => {
       res.redirect("/");
     })
 });
-
-router.post('/premium',(req, res)=>{
-  var dueDate = new Date();
-  dueDate.setFullYear(dueDate.getFullYear() + 1);
-  let uId = '6295b026471b867449118a1c'
-  userHealpers.getPremium(uId,dueDate).then((id) => {
-    userHealpers.generateRazorpay(id).then(()=>{
-
-    })
-  })
-})
-
-router.get('/edit-product/:id',(req, res)=>{
-  userHealpers.getProduct(req.params.id).then((product)=>{
-    res.render('edit-product',{product})
-  })
-})
-
-router.post('/edit-product/:id',(req, res)=>{
-  let id = req.params.id
-  userHealpers.editProduct(req.body,req.params.id).then(()=>{
-    res.redirect('/')
-    if (req.files.image) {
-      let image = req.files.image
-      image.mv("public/images/product-images/" + id + "(1)" + ".jpg")
-    }
-  });
-})
-
-router.get('/delete-product/:id',(req, res)=>{
-  userHealpers.deleteProduct(req.params.id).then((response)=>{
-    res.send(response)
-  })
-})
 
 router.get("/login", (req, res) => {
   if (req.session.user) {
@@ -109,6 +64,12 @@ router.post("/login", async (req, res) => {
     }
   });
 });
+
+router.get("/product/:id", async(req, res) => {
+  userHealpers.getProduct(req.params.id).then((product) => {
+    res.render("product-details",{product})
+  })
+})
 
 router.get("/add_location", (req, res) => {
   res.render("add_location");
@@ -144,7 +105,6 @@ router.post('/add-details',(req, res) => {
   console.log(productdetails);
 })
 
-
 router.post("/image-upload", (req, res) => {
   let user = req.session.user;
   userHealpers.sellProduct(productdetails, user).then((id) => {
@@ -179,20 +139,6 @@ router.get('/add-favorites/:p_id',(req, res)=> {
   })
 })
 
-router.get('/dashboard',(req, res)=>{
-  res.render('user-dashboard')
-})
-
-router.get('/report_issue',(req, res)=>{
-  res.render("report")
-})
-
-router.post('/report-issue',(req, res)=>{
-  userHealpers.report(req.body,req.session.user._id).then(()=>{
-    res.redirect('/')
-  })
-})
-
 router.get('/favorites',(req, res)=> {
   userHealpers.getFavorites(req.session.user._id).then((response)=>{
     let favorites = response[0].favorites
@@ -213,7 +159,64 @@ router.get("/category/:category", (req, res) => {
   res.redirect("/");
 });
 
-router.post
+router.get('/premium',(req, res)=>{
+  res.render('premium',{'user': req.session.user})
+})
+
+router.post('/premium',(req, res)=>{
+  userHealpers.generateRazorpay().then((response) => {
+    sub_id = response.subscriptionId;
+    response.order.user = req.body.user
+    res.json(response.order)
+  })
+})
+
+router.post('/verifyPayment',(req, res)=>{
+  userHealpers.verifyPayment(req.body).then(() => {
+    let userId = req.body['order[user]']
+    let dueDate = new Date()
+    userHealpers.getPremium(userId,dueDate,sub_id).then(()=>{
+      res.redirect('/')
+    })
+  })
+})
+
+router.get('/dashboard',(req, res)=>{
+  res.render('user-dashboard')
+})
+
+router.get('/edit-product/:id',(req, res)=>{
+  userHealpers.getProduct(req.params.id).then((product)=>{
+    res.render('edit-product',{product})
+  })
+})
+
+router.post('/edit-product/:id',(req, res)=>{
+  let id = req.params.id
+  userHealpers.editProduct(req.body,req.params.id).then(()=>{
+    res.redirect('/')
+    if (req.files.image) {
+      let image = req.files.image
+      image.mv("public/images/product-images/" + id + "(1)" + ".jpg")
+    }
+  });
+})
+
+router.get('/delete-product/:id',(req, res)=>{
+  userHealpers.deleteProduct(req.params.id).then((response)=>{
+    res.send(response)
+  })
+})
+
+router.get('/report_issue',(req, res)=>{
+  res.render("report")
+})
+
+router.post('/report-issue',(req, res)=>{
+  userHealpers.report(req.body,req.session.user._id).then(()=>{
+    res.redirect('/')
+  })
+})
 
 router.post("/otp", async (req, res) => {
   let otp = req.body.otp;

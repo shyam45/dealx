@@ -10,6 +10,12 @@ const authToken = "2208ffb2fd146a3aa97459540a374ed5";
 const serviceId = "VA07e93405cd0ff9e369a87c7e282ed2af"
 const objectId = mongoose.Types.ObjectId
 const client = require("twilio")(accountSid, authToken);
+const Razorpay = require('razorpay');
+
+var instance = new Razorpay({
+  key_id: 'rzp_test_kmq5nVDtZoxuYi',
+  key_secret: 'P8ebn9gARuTf5udSoBgaorPy',
+});
 module.exports = {
     doSignup: (data) => {
             return new Promise(async(resolve, reject) => {
@@ -173,24 +179,25 @@ module.exports = {
             })
         })
     },
-    generateRazorpay: (subscriptionId)=>{
-        var options={
-            amount : 2999,
-            currency:"INR",
-            receipt : ""+subscriptionId
-        };
-        instance.orders.create(options,function(err,order){
-            // console.log(order);
-            if(err){
-                console.log(err);
-            }else{
-                resolve(order) 
-            }
+    generateRazorpay: ()=>{
+        return new Promise((resolve, reject)=>{
+            let subscriptionId = new objectId()
+            var options={
+                amount : 2999*100,
+                currency:"INR",
+                receipt : ""+subscriptionId
+            };
+            instance.orders.create(options,function(err,order){
+                if(err){
+                    console.log(err);
+                }else{
+                    resolve({order,subscriptionId}) 
+                }
+            })
         })
     },
-    getPremium: (uId,date)=>{
+    getPremium: (uId,date,sub_id)=>{
         return new Promise((resolve,reject)=>{
-            let sub_id = new objectId();
             db.collection('users').updateOne({_id:objectId(uId)},
                 { 
                     $set: { 
@@ -200,8 +207,23 @@ module.exports = {
                         }
                     }  
                 }).then(()=>{
-                    resolve(sub_id);
+                    resolve();
                 })
+        })
+    },
+
+    verifyPayment: (details) => {
+        return new Promise(async (resolve, reject) => {
+            const crypto = require('crypto');
+            let hmac = crypto.createHmac('sha256', 'P8ebn9gARuTf5udSoBgaorPy')
+            hmac.update(details['payment[razorpay_order_id]'] + '|' + details['payment[razorpay_payment_id]']);
+            hmac = hmac.digest('hex')
+            //  console.log(details);
+            if (hmac == details['payment[razorpay_signature]']) {
+                resolve()
+            } else {
+                reject()
+            }
         })
     },
 
