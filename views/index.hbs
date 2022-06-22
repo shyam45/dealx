@@ -1,72 +1,164 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mb-5" style="background-color: #929fba; margin-top:5rem; height:30px">
-    <span class="navbar-brand">Categories:</span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="basicExampleNav">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Top deals
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/mobile">Mobile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/accessories">Accessories</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/tablet">Tablet</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/cars">Cars</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/bikes">Bikes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/furniture">Furniture</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/category/fashion">Fashion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pets</a>
-        </li>
-      </ul>
-      <div class="md-form my-0">
-        <a class="nav-link" href="/sell_product/{{user._id}}">Sell</a>
-      </div>
-    </div>
-  </nav>
-
-  <section class="text-center mb-4">
-    <div class="row fadeIn">
-      {{#each products}}
-      {{#each this}}
-      {{#if this.name}}
-      <div class="col-lg-3 col-md-6 col-sm-12 mb-4" onclick="location.href='/product/{{this._id}}'">
-        <div class="card">
-          <div class="view overlay">
-            <img src="/images/product-images/{{this._id}}(1).jpg" class="card-img-top" alt=""/>
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <div class="card-body text-center">
-            <h5>{{this.name}}</h5>
-            <p>{{this.description}}</p>
-            <h4 class="font-weight-bold blue-text">
-              <strong>₹ {{this.price}}</strong>
-            </h4>
-          </div>
+<div class="container mt-5 pt-3">
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color mt-4">
+        <a class="font-weight-bold white-text mr-4 text-decoration-none" href="/">Categories</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/mobile">Mobile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/accessories">Accessories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/tablet">Tablet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/cars">Cars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/bikes">Bikes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/furniture">Furniture</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/fashion">Fashion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pets</a>
+                </li>
+            </ul>
+            {{!-- <form class="search-form" role="search">
+                <div class="form-group md-form my-0 waves-light">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+            </form> --}}
         </div>
-      </div>
-      {{/if}}
-      {{/each}}
-      {{/each}}
+    </nav>
+
+     <div class="mx-3 my-4">
+        <div class="view z-depth-1">
+            <img src="https://mdbootstrap.com/img/Photos/Others/ecommerce6.jpg" class="img-fluid" alt="sample image">
+            <div class="mask rgba-stylish-slight">
+                <div class="dark-grey-text text-right pt-lg-5 pt-md-1 mr-5 pr-md-4 pr-0">
+                    <div>
+                        <a> <span class="badge badge-primary">SALE</span> </a>
+                        <h2 class="card-title font-weight-bold pt-md-3 pt-1"><strong>Sale 20% off on every smartphone!</strong></h2>
+                        <a class="btn mr-0 btn-primary btn-rounded clearfix d-none d-md-inline-block">Read more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+
+    <section class="mt-5">
+        <h4 class="font-weight-bold mt-4 dark-grey-text"><strong>TOP DEALS</strong></h4>
+        <hr class="mb-5">
+        <div class="row">
+            {{#each topdeals}}
+                {{#each this}}
+                    {{#if this._id}}
+                        <div class="col-lg-3 col-md-6 mb-4" onclick="location.href='/product/{{this.p_id}}'">
+                            <div class="card card-ecommerce">
+                                <div class="view overlay">
+                                    <img src="/images/product-images/{{this.p_id}}(1).jpg" class="img-fluid" alt="">
+                                    <a> <div class="mask rgba-white-slight"></div> </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text text-decoration-none">{{this.product.name}}</a></strong></h5><span class="badge badge-danger mb-3">bestseller</span>
+                                    <div class="card-footer pb-0">
+                                        <div class="row mb-0 d-flex">
+                                            <span class="float-left" style="width: 8rem;"><strong>₹ {{this.product.price}}</strong></span>
+                                            <a href="/add-favorites/{{this.p_id}}" class="float-right ml-4" style="width: 1rem"><i class="bx bx-heart text-warning fs-5"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    {{/if}}
+                {{/each}}
+            {{/each}}
+        </div>
+    </section>
+    <section class="my-5">
+        <h4 class="font-weight-bold mt-4 dark-grey-text"><strong>FRESH DEALS</strong></h4>
+        <hr class="mb-5">
+        <div class="row">
+            {{#each products}}
+                        <div class="col-lg-3 col-md-6 mb-4"  onclick="location.href='/product/{{this.p_id}}'">
+                            <div class="card card-ecommerce">
+                                <div class="view overlay">
+                                    <img src="/images/product-images/{{this.p_id}}(1).jpg" alt="" class="img-fluid" alt="">
+                                    <a> <div class="mask rgba-white-slight"></div> </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title mb-1"><strong><a href="" class="dark-grey-text text-decoration-none">{{this.product.name}}</a></strong></h5><span class="badge badge-danger mb-3">bestseller</span>
+                                    <div class="card-footer pb-0">
+                                        <div class="row mb-0 d-flex">
+                                            <span class="float-left" style="width: 8rem;"><strong>₹ {{this.product.price}}</strong></span>
+                                            <a href="/add-favorites/{{this._id}}" class="float-right ml-4" style="width: 1rem"><i class="bx bx-heart text-warning fs-5"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            {{/each}}
+        <div>
+        
+    </section>
 </div>
+{{!-- 
+<script>
+    $('input[name=SbrandName]').change(function() {
+  
+    $.ajax({
+        url: '/search/result/',  
+        method: "post",
+        data: $('#searchForm').serialize(),
+        success: (isResult) => {
+            if (isResult) {
+                // window.location.reload()
+                // $('#products').load('/products/filter');
+                $('#products').load(location.href + " #products");
+            }
+        }
+    })
+
+  });
+
+
+
+$('#SsortMenu').on('change', function () {
+    // alert( this.value );
+    $.ajax({
+        url: '/search/result/',  
+        method: "post",
+        data: $('#searchForm').serialize(),
+        success: (isResult) => {
+            if (isResult) {
+                // window.location.reload()
+                // $('#products').load('/products/filter');
+                $('#products').load(location.href + " #products");
+            }
+        }
+    })
+});
+
+
+$('input[name=Sprice]').change(function() {
+    $.ajax({
+        url: '/search/result/',  
+        method: "post",
+        data: $('#searchForm').serialize(),
+        success: (isResult) => {
+            if (isResult) {
+                // alert("jsakdjs")
+                // window.location.reload()
+                // $('#products').load('/products/filter');
+                $('#products').load(location.href + " #products");
+            }
+        }
+    })
+ })
+</script> --}}

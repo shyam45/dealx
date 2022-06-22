@@ -1,15 +1,28 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgba(0, 0, 0, 0.8); height:45px">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Admin-panel</a>
-        <ul style="margin-left: auto;" class="navbar-nav me-auto mb-2 mb-lg-0">
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-              <li><a class="dropdown-item text-light" href="/admin/logout">Logout</a></li>           
-          </li>
-        </ul>
-      </div>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar white">
+  <div class="container">
+    <a class="navbar-brand font-weight-bold" href="/"><strong>Admin<span class="text-primary fs-5 ml-1">Dashboard</span></strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    {{#if user}}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+      {{!-- <ul class="navbar-nav ml-auto">
+        <li class="nav-item ml-3">
+          <a class="nav-link dark-grey-text font-weight-bold" href="/wishlist"><i class="bx bx-heart text-primary"></i> Wishlist</a>
+        </li>
+        <li class="nav-item ml-3">
+          <a class="nav-link dark-grey-text font-weight-bold"href="/sell_product"><i class="bx bx-cart-add text-primary fs-5 mr-1"></i> Sell Product</a>
+        </li>
+        <li class="nav-item dropdown ml-3">
+          <a class="nav-link dropdown-toggle dark-grey-text font-weight-bold" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bx bx-user text-primary"></i> Profile </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+            <a class="dropdown-item waves-effect waves-light" href="/dashboard">My account</a>
+            <a class="dropdown-item waves-effect waves-light" href="/logout">Log out</a>
+          </div>
+        </li>
+      </ul> --}}
     </div>
-  </nav>
-</header>
+{{/if}}
+  </div>
+</nav>
+<!-- /.Navbar -->

@@ -1,4 +1,74 @@
-<div style="background-color: #dbd7d7; height:100vh">
+<div class="container mt-5 pt-3">
+  <section id="productDetails">
+    {{#each product}}
+    {{#if this._id}}
+    <div class="card  hoverable">
+      <div class="row my-5">
+        <div class="col-lg-6">
+          <div>
+            <img src="/images/product-images/{{this.p_id}}(1).jpg" width="500" alt="First slide" class="img-fluid ml-4">
+          </div>
+        </div>
+        <div class="col-lg-5 mr-3 text-center text-md-left">
+          <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+            <strong>{{this.product.name}}</strong>
+          </h2>
+          <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">{{this.product.badge}}</span>
+          <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+            <span class="red-text font-weight-bold">
+              <strong>₹ {{this.product.price}}</strong>
+            </span>
+          </h3>
+          <div id="accordion">
+            <div class="card mb-0">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed text-decoration-none text-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Product Details
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  {{this.product.details}}
+                </div>
+              </div>
+            </div>
+            <div class="card mb-0">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed text-decoration-none text-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    product location
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  {{this.location.name}}<br>
+                  {{this.location.phone}} <br>
+                  {{this.location.houseName}} <br>
+                  {{this.location.city}} <br>
+                  {{this.location.pincode}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 mb-4">
+            <div class="col-md-12 text-center text-md-left text-md-right">
+              <a href="/book-product/{{this.p_id}}" onclick="SendEmail({{../product}}) return false;" class="btn btn-primary btn-rounded mt-4">
+              <i class="bx bx-cart-plus mr-2" aria-hidden="true"></i> Book Now</a>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      {{/each}}
+    </section>
+
+
+{{!-- <div style="background-color: #dbd7d7; height:100vh">
 <div class="container pt-5">
     {{#each product}}
     {{#if this._id}}
@@ -24,11 +94,35 @@
                 <a href="" class="btn btn-primary mt-3">Book Now</a>
             </div>
             <div class="bg-white mt-3 p-3" style="height:185px">
-                <p>qwertyuio</p>
+                <p>{{this}}</p>
             </div>
         </div>
     </div>
     {{/if}}
     {{/each}}
 </div>
-</div>
+</div> --}}
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+  <script>
+    function SendEmail(data){
+      console.log(data);
+      Email.send({
+    Host : "smtp.google.com",
+    Username : "shm24677@gmail.com",
+    Password : "B0B6B4A8CFC8310670746A67426C9D1E5328",
+    To : 'shm24677@gmail.com',
+    From : document.getElementById("email").value,
+    Subject : "This is the subject",
+    Body : "Name :" + document.getElementById("name").value
+    + "<br>Email :" + document.getElementById("email").value
+    + "<br>Subject :" + document.getElementById("subject").value
+    + "<br>Message :" + document.getElementById("message").value
+}).then(
+  message => alert(message)
+);
+    }
+    
+  </script>
+

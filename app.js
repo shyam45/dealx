@@ -8,14 +8,23 @@ const db = mongoose.connection
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var hbs = require('express-handlebars')
+const Handlebars = require('handlebars');
 var app = express();
 var fileUpload = require('express-fileupload')
 var session=require('express-session')
+const dotenv  = require('dotenv')
+
+dotenv.config()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
+
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 app.engine( 'hbs', hbs.engine( {extname: 'hbs',defaultLayout: 'layout',layoutsDir: __dirname + '/views/layout/',partialsDir: __dirname + '/views/partials/'}));
 
 app.use(logger('dev'));
@@ -35,7 +44,7 @@ app.use((req,res,next)=>{
     next()
   })
 
-mongoose.connect('mongodb://localhost:27017/Dealx')
+mongoose.connect(process.env.MONGODB)
 
 db.on('error',console.error.bind(console,'connection error'));
 

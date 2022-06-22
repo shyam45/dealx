@@ -1,8 +1,32 @@
-<button type="submit" style="margin: 100px;" onclick ="checkoutForm()">subscription</button>
-{{user._id}}
+<div class="container-fluid" style="background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);">
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 m-auto">
+          <div class="card shadow-lg px-3" style="margin-top: 5rem;">
+            <div class="card-body">
+              <div class="text-center p-3">
+                <h5 class="card-title">Premium</h5>
+                <span class="h2">₹ 2999</span>/Year
+              </div>
+            </div>
+            <ul class="list-group list-group-flush mt-4">
+              <li class="list-group-item mt-4"> <i class="bx bx-badge-check text-primary fs-5"></i> Advertise your product after your free trial (30 Days)</li>
+              <li class="list-group-item"> <i class="bx bx-badge-check text-primary fs-5"></i> Your Product Added to Top list </li>
+              <li class="list-group-item"> <i class="bx bx-badge-check text-primary fs-5"></i> 24 X 7 support</li>
+            </ul>
+            <div class="card-body text-center">
+              <button class="btn btn-outline-primary btn-lg" onclick ="checkoutForm()" style="border-radius:30px">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </body>
+
+
+{{!-- <button type="submit" style="margin: 100px;" onclick ="checkoutForm()">subscription</button> --}}
 <input type="text" id="user" value="{{user._id}}" hidden>
 <script>
-console.log('ajax')
 
         function checkoutForm(){
             let user = $('#user').val();
@@ -55,7 +79,7 @@ function razorpayPayment(order){
             success:(response)=>{
                 console.log("success")
                 if(response){
-                    location.href='/orderSuccess'
+                    location.href='/'
                 }else{
                     alert("Payment Failed")
                 }

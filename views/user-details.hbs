@@ -1,0 +1,177 @@
+<div class="container" style="margin-top: 6rem;">
+    <div class="col-md-10  border m-auto">
+        <h3 class="m-auto pt-5" style="width: fit-content;color: #012970">User Details</h3>
+        <div class="row py-5 px-4">
+            <div class="col-md-6 border-end">
+                <div class="d-flex my-1">
+                    <i class="bx bx-user fs-5 text-primary mr-2"></i>
+                    <h5>Name <span class="text-primary ml-2">:</span></h5>
+                    <h5 class="ml-3">{{details.name}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-phone fs-5 text-primary mr-2"></i>
+                    <h5>Phone <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{details.phone}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-envelope fs-5 text-primary mr-2"></i>
+                    <h5>Email <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{details.email}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-map fs-5 text-primary mr-2"></i>
+                    <h5>City <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{city}}</h5>
+                </div>
+            </div>
+            <div class="col-md-6 pl-5">
+                <div class="d-flex my-1">
+                    <i class="bx bx-cart-alt fs-5 text-primary mr-2"></i>
+                    <h5>Products <span class="text-primary ml-2">:</span></h5>
+                    <h5 class="ml-3">{{productCount}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-rupee fs-5 text-primary mr-2"></i>
+                    <h5>Revenue <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{details.totalRevenue}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-shopping-bag fs-5 text-primary mr-2"></i>
+                    <h5>Purchased <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{orderCount}}</h5>
+                </div>
+                <div class="d-flex my-1">
+                    <i class="bx bx-cart-alt fs-5 text-primary mr-2"></i>
+                    <h5>Sold <span class="text-primary ml-2">:</span> </h5>
+                    <h5 class="ml-3">{{salesCount}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-5">
+    <div class="col-md-9 m-auto">
+        <div class="text-center">
+            <span class="mx-3 fs-6" onclick="viewProducts()">Products</span>
+            <span class="mx-3 fs-6" onclick="viewSales()">Sales</span>
+            <span class="mx-3 fs-6" onclick="viewOrders()">Orders</span>
+        </div>
+    </div>
+    <div class="card-body mt-5 border p-5 mx-3" id="products">  
+        <table class="table table-borderless datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each details.products}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.category}}</td>
+                    <td><img src="/images/product-images/{{this.p_id}}(1).jpg" class="card-img-top" alt="" style="width: 50px;"/></td>
+                    {{#ifEquals this.status "sold"}}
+                    <td><span class="badge bg-success">sold</span></td>
+                    {{/ifEquals}}
+                    {{#ifEquals this.status "unsold"}}
+                    <td><span class="badge bg-secondary">unsold</span></td>
+                    {{/ifEquals}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body mt-5 border p-5 mx-3" style="display: none;" id="sales">  
+        <table class="table table-borderless datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each details.sales}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.product.name}}</td>
+                    <td>{{this.buyer.name}}</td>
+                    <td>{{this.product.price}}</td>
+                    <td>{{this.product.category}}</td>
+                    <td><img src="/images/product-images/{{this.product.p_id}}(1).jpg" class="card-img-top" alt="" style="width: 50px;"/></td>
+                    {{#ifEquals this.status "approved"}}
+                    <td><span class="badge bg-success">Success</span></td>
+                    {{/ifEquals}}
+                    {{#ifEquals this.status "pending"}}
+                    <td><span class="badge bg-secondary">Pending</span></td>
+                    {{/ifEquals}}
+                    {{#ifEquals this.status "rejected"}}
+                    <td><span class="badge bg-danger">failed</span></td>
+                    {{/ifEquals}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body mt-5 border p-5 mx-3" style="display: none;" id="orders">  
+        <table class="table table-borderless datatable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each details.orders}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.product.name}}</td>
+                    <td>{{this.product.price}}</td>
+                    <td>{{this.product.category}}</td>
+                    <td><img src="/images/product-images/{{this.product.p_id}}(1).jpg" class="card-img-top" alt="" style="width: 50px;"/></td>
+                    {{#ifEquals this.status "approved"}}
+                    <td><span class="badge bg-success">Success</span></td>
+                    {{/ifEquals}}
+                    {{#ifEquals this.status "pending"}}
+                    <td><span class="badge bg-secondary">Pending</span></td>
+                    {{/ifEquals}}
+                    {{#ifEquals this.status "rejected"}}
+                    <td><span class="badge bg-danger">failed</span></td>
+                    {{/ifEquals}}
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function viewProducts(){
+        document.getElementById("products").style.display = "block";
+        document.getElementById("sales").style.display = "none";
+        document.getElementById("orders").style.display = "none";
+    }
+    function viewSales(){
+        document.getElementById("products").style.display = "none";
+        document.getElementById("sales").style.display = "block";
+        document.getElementById("orders").style.display = "none";
+    }
+    function viewOrders(){
+        document.getElementById("products").style.display = "none";
+        document.getElementById("sales").style.display = "none";
+        document.getElementById("orders").style.display = "block";
+    }
+</script>

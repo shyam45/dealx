@@ -1,7 +1,5 @@
-<div class="row bg-light">
-  <div
-    class="col-md-4 m-auto mt-5 px-5 pt-5"
-    style="border-style: solid;border-width: 1px;border-radius: 15px;border-color: silver;"
+<div class="row bg-light mt-5">
+  <div class="col-md-4 m-auto px-5 mt-5 pt-5" style="border-style: solid;border-width: 1px; border-radius: 15px;border-color: silver;"
   >
     <h2 class="text-center">Sell Product</h2>
     <form
@@ -56,11 +54,11 @@
       </div>
 
       <div class="mt-2 text-center">
-        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        <button type="submit" class="btn btn-primary my-4">Submit</button>
       </div>
     </form>
   </div>
-</div>
+</div> 
 
 
 <script
@@ -76,27 +74,22 @@
 ></script>
 <script>
   $(document).ready(function(){
-    $("#location").validate({
-      errorClass:"valierrors", 
+    $("#product").validate({
+      errorClass:"validerrors", 
       rules:{
         name:{
           required:true, 
           minlength:4 
         }, 
-        phone:{
-          required:true, 
-          minlength:10 
-        }, 
-        houseName:{
+        price:{
           required:true, 
         }, 
-        city:{
+        category:{
           required:true, 
         }, 
-        pincode:{
-          required:true,
-          minlength:6 
-        } 
+        description:{
+          required:true, 
+        }
       } 
     }) 
   })

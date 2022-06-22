@@ -1,8 +1,23 @@
-<div class="container card shadow mt-5">
-    <form action="/add-details" method="POST">
+<div class="container card shadow" style="margin-top: 5rem;">
+    <form action="/add-details" method="POST" id="details">
         <p class="fs-5 text-center mt-3">Add Details</p>
         <textarea class="form-control" name="description" id="description" cols="20" rows="15"></textarea>
         <input type="submit" value="ADD PRODUCT" class="btn btn-success my-3">
     </form>
-
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+    $("#details").validate({
+      errorClass: "valierrors",
+      rules:{
+        description:{
+          required:true,
+          minlength:10
+        }
+      }
+    })
+  })
+  
+</script>

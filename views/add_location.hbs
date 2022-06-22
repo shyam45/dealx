@@ -1,5 +1,5 @@
-<div class="row bg-light">
-    <div class="col-md-4 m-auto mt-5 px-5 pt-5"
+<div class="row bg-light" style="margin-top:7rem">
+    <div class="col-md-4 m-auto px-5 pt-5"
         style="border-style: solid;border-width: 1px;border-radius: 15px;border-color: silver;">
         <h2 class="text-center">Add Location</h2>
         <form action="/add_location" method="post" id="location">
@@ -11,11 +11,18 @@
             </div>
 
             <div class="form-group mt-4">
-                <input type="text" class="form-control" name='houseName' placeholder="HouseName">
+                <textarea class="form-control" name='address' placeholder="Address"></textarea>
             </div>
 
             <div class="form-group mt-4">
-                <input type="city" class="form-control" name='city' placeholder="City">
+                <select name="city" class="form-control">
+                  <option value="">City</option>
+                  <option value="trivandrum">Trivandrum</option>
+                  <option value="kochi">Kochi</option>
+                  <option value="thrissur">Thrissur</option>
+                  <option value="malappuram">Malappuram</option>
+                  <option value="calicut">Calicut</option>
+                </select>
             </div>
 
             <div class="form-group mt-4">
@@ -23,7 +30,7 @@
             </div>
             
             <div class="mt-2 text-center">
-                <button type="submit" class="btn btn-primary mt-4" >Submit</button>
+                <button type="submit" class="btn btn-primary mt-3 mb-5" >Submit</button>
             </div>
         </form>
     </div>
@@ -34,7 +41,7 @@
 <script>
     $(document).ready(function(){
     $("#location").validate({
-      errorClass: "valierrors",
+      errorClass: "validerrors",
   
       rules:{
         name:{
@@ -47,7 +54,7 @@
           minlength:10
         },
   
-        houseName:{
+        address:{
           required:true,
         },
 

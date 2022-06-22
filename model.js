@@ -26,42 +26,44 @@ const userSchema = new mongoose.Schema({
         required: 'Password is required',
         minlength:8
     },
+    orders:{
+        type: Array,
+    },
+    products:{
+        type:Array
+    },
+    sales:{
+        type: Array
+    },
     favorites:{
         type : Array
+    },
+    totalRevenue:{  
+        type: Number
     }
 })
 
 const User = mongoose.model('User',userSchema)
 
 const productSchema = new mongoose.Schema({
-    name:{
+    s_id: {
         type: String,
-        required: 'name is required',
-        minlength:4
     },
-    category:{
-        type: String,
-        required: 'category is required',
+    p_id:{
+        type: String
     },
-    description:{
-        type : String,
-        required: 'description is required',
+    status:{
+        type: String
     },
-    price:{
-        type : Number,
-        required: 'Price is required',
-        minlength:9
+    location:{
+        type: Object
     },
-    details:{
-        type : String,
-        required: 'Details is required',
-    },
-    toplist:{
-        type : Boolean
+    product:{
+        type: Object
     }
 })
 
-const product = mongoose.model('Prooducts',productSchema)
+const product = mongoose.model('Products',productSchema)
 
 const locationSchema = new mongoose.Schema({
     u_id:{
@@ -76,9 +78,13 @@ const locationSchema = new mongoose.Schema({
         type: Number,
         required: 'PhoneNumber is required',
     },
-    houseName:{
+    email:{
+        type: String,
+        required: 'Email is required'
+    },
+    address:{
         type : String,
-        required: 'HouseName is required',
+        required: 'Address is required',
     },
     city:{
         type : String,
